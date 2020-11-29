@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Navbar } from './components/Navbar'
+import FilmsForm  from './components/FindFilmsForm'
+import { SortFilms } from './components/SortFilms'
 
-function App() {
+const App: React.FunctionComponent = () => {
+
+  // const [title, setTitle] = useState<string>('')//for input!!
+    
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <div className="container">
+        <FilmsForm />
+        <SortFilms />
+      </div>
+    </>
   );
 }
 
 export default App;
+
+
+//for full info: http://www.omdbapi.com/?t=Kill&plot=full&apikey=27834fd8
+//Short:
+// by title: http://www.omdbapi.com/?s=Kill&plot=short&apikey=27834fd8
+//by ibmd: http://www.omdbapi.com/?i=tt1285016&plot=short&apikey=27834fd8 

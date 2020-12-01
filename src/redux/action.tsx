@@ -1,5 +1,5 @@
 import { newFilmsequest } from '../components/FindFilmsForm'
-import { REQUEST_FILMS  } from './types'
+import { REQUEST_FILMS, SORTING_FILMS_YEAR } from './types'
 
 
 
@@ -16,3 +16,7 @@ export function fetchFilms(){
     
 }
 
+export const sortByYear = (movies) => ({
+    type: SORTING_FILMS_YEAR,
+    payload: movies
+})

@@ -68,7 +68,7 @@ ul.catalog-navigation > li > a:hover{
 
 .container {
   display: grid;
-  width: 100%;
+  width: auto;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
   /* grid-auto-rows: 200px; */
@@ -81,10 +81,11 @@ ul.catalog-navigation > li > a:hover{
 }
 
 .search-form {
+  /* position: relative; */
   margin-top: 100px;
   background: url('./images/background_1.png')  no-repeat;
   display: grid;
-  width: 100%;
+  width: 955px; 
   grid-template-rows: 1fr 1fr 1fr;
   grid-area: a;
   align-self: center;
@@ -98,10 +99,11 @@ ul.catalog-navigation > li > a:hover{
   display: grid;
   /* grid-template-rows: 2fr; */
   grid-gap: 10px;
+  /* width: 955px; */
 }
 
 .input-form > label {
-
+  
   margin: 0px auto;
   font-size: 130%;
   color: white;
@@ -180,7 +182,7 @@ ul.catalog-navigation > li > a:hover{
   background-color: gray;
   height: 50px;
   background: rgba(255, 245, 215, .6);
-  
+
 }
 
 .counter {

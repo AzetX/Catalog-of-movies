@@ -27,7 +27,8 @@ interface FilmsRequest {
 
 
  export interface FilmsCollection {
-      films?: any
+      films?: any;
+      kol?: number;
   }
 export let newFilmsequest: FilmsRequest = {}
 
@@ -67,11 +68,12 @@ const InputForm: React.FC <InputFilmsProps> = ( { title, changeHandler } ) => {
     )
 }
 
- const FilmsForm: React.FC <FilmsCollection> = ( { films } ) => {
+ const FilmsForm: React.FC <FilmsCollection> = ( { films, kol } ) => {
     const [title, setTitle] = useState<string>('')//for input
     const [paramMovies, setParamMovies] = useState<string>('s') //for parap search: param s - for title film. По умолчанию стейт s - title film. (http://www.omdbapi.com/?s=!!${Kill}&&apikey=27834fd8)
                                                                              // Если на IMBD, то setState на i http://www.omdbapi.com/?i=tt1285016&plot=short&apikey=27834fd8 
     console.log(films)
+    console.log(kol)
     const changeHandler = ({ target }: React.ChangeEvent<HTMLFormElement>) => { //for change input state. название фильма
         setTitle(target.value)
     }
@@ -91,6 +93,7 @@ const InputForm: React.FC <InputFilmsProps> = ( { title, changeHandler } ) => {
     }
   
     return(
+     
         <div className="search-form">
             <InputForm  title={ title } changeHandler={changeHandler}/>
             <div className="buttons-form">
@@ -98,6 +101,7 @@ const InputForm: React.FC <InputFilmsProps> = ( { title, changeHandler } ) => {
             <FethDataButton submitHandler={submitHandler} /> 
             </div>
         </div>
+     
     )
 }
 
@@ -108,4 +112,5 @@ const mapStateToProps = function(store) {
     };
   }
 
+  
  export default connect(mapStateToProps, null)(FilmsForm)

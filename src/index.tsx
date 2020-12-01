@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { compose, createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './redux/rootReducer';
 import { Provider } from 'react-redux';
-import thunk, { ThunkMiddleware }  from 'redux-thunk';
+// import thunk, { ThunkMiddleware }  from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import { sagaWatcher } from './redux/saga';
 
@@ -15,7 +15,7 @@ import { sagaWatcher } from './redux/saga';
 const saga = createSagaMiddleware()
 
 // thunk as ThunkMiddleware<any>,
-const store = createStore(rootReducer, compose(
+const store =  createStore(rootReducer, compose(
   applyMiddleware(saga), //wtf!!!???????????
   (window&& (window as any).__REDUX_DEVTOOLS_EXTENSION__) && (window&& (window as any).__REDUX_DEVTOOLS_EXTENSION__())
 ))

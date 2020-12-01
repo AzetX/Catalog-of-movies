@@ -1,32 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { FilmsCollection } from './FindFilmsForm'
-import { fetchFilms } from '../redux/action'
+import { fetchFilms, sortByYear } from '../redux/action'
 
-const SortigMovies: React.FC = () => {
+
+interface Nigga {
+    sortingByYear?: any
+    films?: any;
+}
+
+const SortigMovies: React.FC<Nigga> = ( { sortingByYear, films } ) => {
+    
     return (
         <div className="soring">
             <div> Sorting by: </div> 
-            <div className="release-date"> date of release </div>
+            <div className="release-date" onClick={() => sortingByYear(films)}> Year </div>
             <div className="raiting"> raiting </div>
         </div>
     )
 }
 
 
-const CounterMovies: React.FC<FilmsCollection> = ( { films } ) => {
-    (Array.of(films).length-1===0) ? console.log('sad'): console.log('good')//не рендерится, принимает в значение начальный стейт
+interface Count {
+    count: any
+}
+
+const CounterMovies: React.FC<Count> = ( { count } ) => {
+
+    
     return (
-        <div className="counter"> Movies found: {Array.of(films).length-1} </div>
+        <div className="counter"> Movies found: { count.length } </div>
     )
 }
 
 
-export const SortFilms: React.FC = () => {
-    return (
+interface Hui {
+    films?: any;
+    count?:number;
+    newState?: any;
+    sortByYear: any;//function
+}
+
+ const SortFilms: React.FC<Hui> = ( { films, sortByYear } ) => {
+
+
+    function sortingByYear(){
+    
+        let newState = films.concat()
+        // return newState.sort((a, b) => a.Year - b.Year)
+         return newState.sort((a, b) => a.Year - b.Year)//работай со стейтом
+        // 
+    } 
+
+     return (
+
         <div className="sort-movies">
-            <CounterMovies />
-            <SortigMovies />
+            <CounterMovies count={films} />
+            <SortigMovies sortingByYear = {sortByYear} films={films}/>
         </div>
     )
 }
@@ -38,12 +68,9 @@ const mapStateToProps = function(store) {
     };
   }
 
-const mapDispatchToProps = function (dispatch) {
-    return {
-        fetchFilms: () => {
-            dispatch(fetchFilms())
-        }
-    }
-}
+  const mapDispatchToProps = {
+        sortByYear: sortByYear
+  }
 
- connect(mapStateToProps, mapDispatchToProps)(CounterMovies)
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortFilms)

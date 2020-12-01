@@ -1,7 +1,8 @@
 import React from 'react';
 import { Navbar } from './components/Navbar'
-import FilmsForm  from './components/FindFilmsForm'
-import { SortFilms } from './components/SortFilms'
+import FilmsForm   from './components/FindFilmsForm'
+import  SortFilms    from './components/SortFilms'
+import  FilmsList   from './components/FilmsList'
 
 const App: React.FunctionComponent = () => {
 
@@ -14,6 +15,7 @@ const App: React.FunctionComponent = () => {
       <div className="container">
         <FilmsForm />
         <SortFilms />
+        <FilmsList />
       </div>
     </>
   );

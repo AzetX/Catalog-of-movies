@@ -1,31 +1,17 @@
-import { FETCH_FILMS, SORTING_FILMS_YEAR } from './types'
+import { FETCH_FILMS, SORTING_FILMS_YEAR, FETCH_FILM_FULL } from './types'
 
 
 
-const initialState = {
+const initialStateMovies = {
     fetchedFilms: []
 }
 
 
-export const filmReducer  = (state = initialState, action: any) => {
+export const MoviesRequestReducer  = (state = initialStateMovies, action: any) => {
     switch (action.type) {
         case FETCH_FILMS:   
-        return {...state, fetchedFilms: state.fetchedFilms.concat(Object.values(action.payload.Search))};
+        return {...state, fetchedFilms: Object.values(action.payload.Search)};    //state.fetchedFilms.concat()
         case SORTING_FILMS_YEAR: 
-        // return {...state, fetchedFilms: action.payload.sort((a, b) => a.Year - b.Year)}
-        // return {...state, fetchedFilms: state.fetchedFilms.filter((item, ind, arr) => action.payload[0]!==item)}
-        // return {...state, fetchedFilms: state.fetchedFilms.sort(function(a, b) {
-        //     console.log(action.payload)
-        //     if (a[action.payload.Year] > b[action.payload.Year]) {
-        //         return 1;
-        //       }
-        //       if (b[action.payload.Year] < a[action.payload.Year]) {
-        //         return -1;
-        //       }
-        //       // a должно быть равным b
-        //       return 0;
-        //   }
-        //   )}
         return {...state, fetchedFilms: state.fetchedFilms.map((item, index, arr) => action.payload[index]).sort(function(a, b){
             if (a.Year > b.Year) {
                 return 1;
@@ -36,8 +22,35 @@ export const filmReducer  = (state = initialState, action: any) => {
               // a должно быть равным b
               return 0;
         })};
+        // case GET_FULL_INFO:
+        // return {...state, fullFilmInfo: state.fullFilmInfo.concat(action.payload)} 
+     
         default: return state;
     }
 }
 
-// action
+
+// const paramRequestMovie = {
+//     titleRequest: '', 
+//     paramRequest: 's',
+// }
+
+// export const paramRequestReducer = (state = paramRequest, action: any) => {
+//     switch(action.type){
+//     case GET_PARAMS_REQUEST: 
+//     return {...state, titleRequest: state.titleRequest = action.titleLoad, paramRequest: state.paramRequest = action.paramLoad};
+//     default: return state
+//     }
+// }
+
+const initialStateMovie = {
+    fetchedFullMovie: []
+}
+
+export const paramFullMovieReducer = (state = initialStateMovie, action: any) => {
+    switch(action.type){
+    case FETCH_FILM_FULL: 
+    return {...state, fetchedFullMovie: Object.values(action.payload)};
+    default: return state
+    }
+}

@@ -44,14 +44,6 @@ interface Hui {
  const SortFilms: React.FC<Hui> = ( { films, sortByYear } ) => {
 
 
-    function sortingByYear(){
-    
-        let newState = films.concat()
-        // return newState.sort((a, b) => a.Year - b.Year)
-         return newState.sort((a, b) => a.Year - b.Year)//работай со стейтом
-        // 
-    } 
-
      return (
 
         <div className="sort-movies">

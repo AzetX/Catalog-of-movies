@@ -30,10 +30,18 @@ interface FilmsRequest {
       films?: any;
       kol?: number;
   }
-export let newFilmsequest: FilmsRequest = {}
+// export let newFilmsequest: FilmsRequest = {} // global object thats right?  
+
+export let parametrMovies;   //
+ function getParamsMovies(titleMovie:string, paramMovies:string){
+    return {
+        titleMovie,
+        paramMovies
+    }
+}
 
 
-const FethDataButton: React.FC<FetchedButtonProp> = ({submitHandler}) => {
+const FethDataButton: React.FC<FetchedButtonProp> = ({ submitHandler }) => {
     const dispatch = useDispatch()
     // const films = useSelector((state: RootState) => {
     //     // return state.films.fetchedFilms //!!!!!!!!!!!!!!!!!!!!
@@ -68,12 +76,11 @@ const InputForm: React.FC <InputFilmsProps> = ( { title, changeHandler } ) => {
     )
 }
 
- const FilmsForm: React.FC <FilmsCollection> = ( { films, kol } ) => {
+ const FilmsForm: React.FC <FilmsCollection> = ( { } ) => {
     const [title, setTitle] = useState<string>('')//for input
     const [paramMovies, setParamMovies] = useState<string>('s') //for parap search: param s - for title film. По умолчанию стейт s - title film. (http://www.omdbapi.com/?s=!!${Kill}&&apikey=27834fd8)
                                                                              // Если на IMBD, то setState на i http://www.omdbapi.com/?i=tt1285016&plot=short&apikey=27834fd8 
-    console.log(films)
-    console.log(kol)
+  
     const changeHandler = ({ target }: React.ChangeEvent<HTMLFormElement>) => { //for change input state. название фильма
         setTitle(target.value)
     }
@@ -85,11 +92,13 @@ const InputForm: React.FC <InputFilmsProps> = ( { title, changeHandler } ) => {
     const submitHandler = ( event: React.ChangeEvent<HTMLFormElement> ) => {//Параметры сабмиты
         event.preventDefault();
         const titleMovie = title;
-        newFilmsequest = {
-            titleMovie,
-            paramMovies
-        }
+        // newFilmsequest = {
+        //     titleMovie,
+        //     paramMovies
+        // }
+        parametrMovies = getParamsMovies(titleMovie, paramMovies);
         setTitle('')
+        return parametrMovies
     }
   
     return(

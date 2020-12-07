@@ -1,36 +1,8 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector, connect } from 'react-redux'
+import { useDispatch, connect } from 'react-redux'
 import { fetchFilms } from '../redux/action'
-import { RootState } from '../redux/rootReducer'
+import { InputFilmsProps, ClickFilmsProps, FetchedButtonProp, FilmsCollection }  from '../interfaces'
 
- interface InputFilmsProps {
-    changeHandler?: any;
-    title?: string;
-}
-
-interface ClickFilmsProps {
-    clickHandler?: any;
-    submitHandler?: any;
-    // films?: any[] = [];
-}
-
-interface FetchedButtonProp {
-    submitHandler?: any;
-    // films?: any;
-    // fetchedFilms?: ;
-}
-
-interface FilmsRequest {
-    paramMovies?: string;
-    titleMovie?: string;
-  }
-
-
- export interface FilmsCollection {
-      films?: any;
-      kol?: number;
-  }
-// export let newFilmsequest: FilmsRequest = {} // global object thats right?  
 
 export let parametrMovies;   //
  function getParamsMovies(titleMovie:string, paramMovies:string){
@@ -42,16 +14,10 @@ export let parametrMovies;   //
 
 
 const FethDataButton: React.FC<FetchedButtonProp> = ({ submitHandler }) => {
-    const dispatch = useDispatch()
-    // const films = useSelector((state: RootState) => {
-    //     // return state.films.fetchedFilms //!!!!!!!!!!!!!!!!!!!!
-    
-    // })
-    //   console.log(films)
-    
+    const dispatch = useDispatch()    
     return (
         <div className="form-button-find">
-        <button id="button-find-films" title="FIND" type="submit" onClick={(event)=> {submitHandler(event); dispatch(fetchFilms())}}>FIND MOVIES</button>
+          <button id="button-find-films" title="FIND" type="submit" onClick={(event)=> {submitHandler(event); dispatch(fetchFilms())}}>FIND MOVIES</button>
         </div>
     )
 }
@@ -76,39 +42,35 @@ const InputForm: React.FC <InputFilmsProps> = ( { title, changeHandler } ) => {
     )
 }
 
- const FilmsForm: React.FC <FilmsCollection> = ( { } ) => {
+
+ const FilmsForm: React.FC <FilmsCollection> = ( {  } ) => {
     const [title, setTitle] = useState<string>('')//for input
-    const [paramMovies, setParamMovies] = useState<string>('s') //for parap search: param s - for title film. По умолчанию стейт s - title film. (http://www.omdbapi.com/?s=!!${Kill}&&apikey=27834fd8)
-                                                                             // Если на IMBD, то setState на i http://www.omdbapi.com/?i=tt1285016&plot=short&apikey=27834fd8 
-  
-    const changeHandler = ({ target }: React.ChangeEvent<HTMLFormElement>) => { //for change input state. название фильма
+    const [paramMovies, setParamMovies] = useState<string>('s') 
+
+    const changeHandler = ({ target }: React.ChangeEvent<HTMLFormElement>) => { 
         setTitle(target.value)
     }
 
-    const clickHandler = (paramReq: string) => { //for change button state. Получаем параметры фидьтра в инпуте
+    const clickHandler = (paramReq: string) => { 
         setParamMovies(paramReq)
     }
 
-    const submitHandler = ( event: React.ChangeEvent<HTMLFormElement> ) => {//Параметры сабмиты
+    const submitHandler = ( event: React.ChangeEvent<HTMLFormElement> ) => {
         event.preventDefault();
         const titleMovie = title;
-        // newFilmsequest = {
-        //     titleMovie,
-        //     paramMovies
-        // }
         parametrMovies = getParamsMovies(titleMovie, paramMovies);
         setTitle('')
         return parametrMovies
     }
-  
+    
     return(
      
         <div className="search-form">
             <InputForm  title={ title } changeHandler={changeHandler}/>
-            <div className="buttons-form">
+            
             <ButtonsForm clickHandler={ clickHandler } submitHandler={submitHandler} />
             <FethDataButton submitHandler={submitHandler} /> 
-            </div>
+          
         </div>
      
     )
@@ -121,5 +83,4 @@ const mapStateToProps = function(store) {
     };
   }
 
-  
  export default connect(mapStateToProps, null)(FilmsForm)

@@ -24,101 +24,81 @@ code {
 
 .nav-wrapper {
   background-color: crimson;
+  margin: 0;
   display: grid;
-  width: 100%;
+  place-items: center;
   min-height: 85px;
   max-height: 150px;
-  grid-template-columns: 2fr 1fr;
-  justify-items: start;
-  align-items: center;
   color: white;
 }
 
 .brand-log {
-  margin-left: 20px;
-  font-size: 200%;
+  font-size: 2.6em;
 }
 
 .brand-log:hover{
   cursor: pointer;
-  color: red;
+  color: palevioletred;
 }
 
-.catalog-navigation {
-  justify-items: center;
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+#logo  {
+  animation: spin 5s linear 0s infinite;
+}
+
+
+.container{
+  margin-top: 60px;
   display: grid;
-  list-style-type: none;
-  margin-right: 20px;
-  padding: 0;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  justify-self: end;
-}
-
-ul.catalog-navigation > li > a {
-  text-decoration: none;
-  color: white;
-  font-size: 110%;
-}
-
-ul.catalog-navigation > li > a:hover{
-  color: red;
-}
-
-
-.container {
-  display: grid;
-  width: auto;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
-  /* grid-auto-rows: 200px; */
-
+  grid-template-rows: 3fr 1fr auto auto;
+  grid-template-columns: auto;
   grid-template-areas: 
-    ". a a ."
-    ". a a ."
-    ". b b ."
-    ;
+    "search-form"
+    "sort-movies"
+    "none-movies"
+    "movies-content";
+    
 }
+
 
 .search-form {
-  /* position: relative; */
-  margin-top: 100px;
-  background: url('./images/background_1.png')  no-repeat;
+  border: 1px solid black;
   display: grid;
-  width: 955px; 
   grid-template-rows: 1fr 1fr 1fr;
-  grid-area: a;
-  align-self: center;
-  justify-self: center;
-  /* border: 1px solid forestgreen; */
-  /* align-items: center; */
-  padding-top: 50px;
+  background: url('./images/background_1.png');
+  margin: 0px auto;
+  width: 800px; 
+  height: 280px;
+  grid: search-form;
 }
 
-.input-form {
+.input-form{
   display: grid;
-  /* grid-template-rows: 2fr; */
-  grid-gap: 10px;
-  /* width: 955px; */
+  justify-items: center;
+  align-items: center;
 }
+
 
 .input-form > label {
-  
-  margin: 0px auto;
-  font-size: 130%;
+  align-self: start;
   color: white;
-  font-weight: bolder;
+  font-size: 20px;
 }
 
 #title {
-  max-width: 792px;
-  height: 50px;
-  border-radius: 8px;
+  width: 750px;
+  height: 45px;
+  border-radius: 10px;
 }
 
-.buttons-form {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+
+.form-buttons-categories  {
+  margin-left: 27px;
   grid-gap: 5px;
 }
 
@@ -133,13 +113,106 @@ ul.catalog-navigation > li > a:hover{
   border-radius: 10px;
   background: crimson;
   color: #fff;
-  padding: 4px 8px;
+  padding: 8px 16px;
   font-size: 1rem;
   cursor: pointer;
 }
 
 #button-title-films {
-  margin-top: 10px;
+  min-width: 100px;
+  font-family: inherit;
+  appearance: none;
+  border: 0;
+  border-radius: 10px;
+  background: crimson;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+.form-button-find{
+  display: grid;
+  align-items: start;
+  justify-content: center;
+}
+
+
+#button-find-films{
+  min-width: 100px;
+  font-family: inherit;
+  appearance: none;
+  border: 0;
+  border-radius: 10px;
+  background: crimson;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#button-find-films:hover, #button-title-films:hover, #button-director-films:hover{
+  background-color: palevioletred;
+}
+
+.sort-movies {
+  padding-top: 10px;
+  grid: sort-movies;
+  margin: 0px auto;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  background: rgba(255, 245, 215, .6);
+  width: 800px; 
+}
+
+.sorting{
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr; 
+}
+
+
+.release-date:hover, .raiting:hover {
+  color: palevioletred;
+  cursor: pointer;
+} 
+
+
+
+.none-movies{
+  display: grid;
+  margin: 0px auto;
+  height: 150px;
+  grid: none-movies;
+  justify-content: center;
+  align-items: end;
+  font-size: 2.5rem;
+}
+
+
+
+.movies-content{
+  display: grid;
+  justify-items: center;
+  margin-top: 15px;
+  grid: movies-content;
+  grid-template-columns: 1fr 1fr 1fr; 
+}
+
+
+.films-content{
+  display: grid;
+  padding-bottom: 10px;
+}
+
+#full-info, .btn-back{
+  justify-self: center;
+  align-self: start;
+  text-decoration: none;
+  color: black;
   min-width: 100px;
   font-family: inherit;
   appearance: none;
@@ -152,54 +225,32 @@ ul.catalog-navigation > li > a:hover{
   cursor: pointer;
 }
 
-#button-title-films:hover, #button-director-films:hover, #button-find-films:hover {
-  background: red;
-}
-
-
-.form-button-find {
-  margin: 0px auto;
-}
-
-#button-find-films{
-  margin: 0px auto;
-  min-width: 100px;
-  font-family: inherit;
-  appearance: none;
-  border: 0;
-  border-radius: 10px;
-  background: crimson;
-  color: #fff;
-  padding: 9px 18px;
-  font-size: 1rem;
+#full-info:hover, .btn-back:hover {
+  color: palevioletred;
   cursor: pointer;
 }
 
-.sort-movies{
-  grid-area: b;
-  display: flex;
-  flex-direction: row;
-  background-color: gray;
-  height: 50px;
-  background: rgba(255, 245, 215, .6);
-
-}
-
-.counter {
+.film-content{
+  background-color: rgba(167, 23, 44, 0.6);
+  width: 50%;
+  margin: 0px auto;
   display: grid;
-  align-items: center;
-  grid-area: counter;
-  flex-grow: 1;
+  place-items: center;
 }
 
-.soring {
-  display: flex;  
-  flex-direction: row;
-  grid-gap: 1em;
-  align-items: center;
+
+
+.film-title, .film-year, .film-rait, .film-descr{
+  justify-self: start;
 }
 
-.release-date:hover, .raiting:hover {
-  color: wheat;
-  cursor: pointer;
+.btn-back{
+  margin:15px ;
 }
+
+
+
+
+
+
+

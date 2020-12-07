@@ -2,15 +2,10 @@ import { render } from '@testing-library/react'
 import React, { Fragment } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { getFullMovie } from '../redux/action'
+import { NavLink } from "react-router-dom";
+import { MoviesInfo }  from '../interfaces'
 
 
-// import { getInfoMovie } from '../redux/action'
-
-interface MoviesInfo {
-    kolMovies?: number;
-    films?: any;
-    // getInfoMovie: any;
-}
 
 export let fullInfoMovie;
 function getFullInfoMovie(titleMove: string){
@@ -19,49 +14,48 @@ function getFullInfoMovie(titleMove: string){
     }
 }
 
-
  const FilmsList: React.FC<MoviesInfo> = ({ films }) => {
     const dispatch = useDispatch()
-
+    
     if(!films.length) {
         return (<p className="none-movies"> Sorry, but movies none found &#128533; </p>)
     }
     
     function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, moveTitle){
-        event.preventDefault()
+
         fullInfoMovie = getFullInfoMovie(moveTitle)
         return fullInfoMovie
     }
 
 
+
     return (
+  
         <div className="movies-content">
             {
             films.map((movie, index) =>(
-            <Fragment key={index}>
+            <div className='films-content' key={index}>
                 <div className="movie-img"><img src={movie.Poster} alt="Poster"/></div>
-                <div className="movie-title"> {movie.Title} </div>   
-                <div className="movie-year">{movie.Year}</div>   
-                <div className="movie-type">{movie.Type}</div> 
-                {/* <div className="movie-fullInfo">Get more info</div>    */}
-                <a href="/" id="full-info" onClick={(event) => { handleClick(event, movie.Title); dispatch(getFullMovie())} }>Get more info</a>
-            </Fragment>
+                <div className="movie-title"><b>Title:</b> <i>{(movie.Title.length <= 30)? movie.Title: `${movie.Title.slice(0, 30)}...` }</i> </div>   
+                <div className="movie-year"><b>Year:</b> <i>{movie.Year}</i></div>   
+                <div className="movie-type"><b>Type:</b> <i>{movie.Type}</i></div> 
+                <NavLink to= "/fullInfo" id="full-info" onClick={(event) => { handleClick(event, movie.Title); dispatch(getFullMovie())} }>Get more info</NavLink>
+            </div>
             ))}
         </div>
+  
     )
-
+    
 }
 
 
 const mapStateToProps = function(store) {
     return {
-      films: store.films.fetchedFilms //смотри на стэйт
+      films: store.films.fetchedFilms, 
+      incorrectData: store.films.incorrectRequestMovies
     };
   }
 
-// const mapDispatchToProps = {
-//     getInfoMovie: getInfoMovie
-// }
 
 
   export default connect(mapStateToProps, null)(FilmsList)

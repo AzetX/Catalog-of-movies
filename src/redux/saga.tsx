@@ -1,13 +1,7 @@
 import { takeEvery, put, call } from 'redux-saga/effects'
-import { FETCH_FILMS, REQUEST_FILMS, REQUEST_FULL_INFO, FETCH_FILM_FULL } from './types'
-// import { newFilmsequest } from '../components/FindFilmsForm'
-
-
+import { FETCH_FILMS, REQUEST_FILMS, REQUEST_FULL_INFO, FETCH_FILM_FULL, GET_MOVIE_WTH_FAILURE, GET_MOVIES_WTH_FAILURE } from './types'
 import { parametrMovies }  from '../components/FindFilmsForm'
 import { fullInfoMovie } from '../components/FilmsList'
-
-
-
 
 
 export function* sagaWatcher() {
@@ -21,17 +15,18 @@ function* sagaWorkerAllMovies() {
     yield put({ type: FETCH_FILMS, payload})
     }
     catch(e){
-        console.error('bad request')
+        yield put({type: GET_MOVIES_WTH_FAILURE, payload: e.payload})
     }
 }
 
 function* sagaWorkerFullMovie() {
     try {
-    const payload =  yield call(fetchFullInfoMovie)
-    yield put({ type: FETCH_FILM_FULL, payload})
+        const payload =  yield call(fetchFullInfoMovie)
+        yield put({ type: FETCH_FILM_FULL, payload})
     }
     catch(e){
-        console.error('bad request')
+        yield put({type: GET_MOVIE_WTH_FAILURE, payload: e.payload})
+        console.error(e)
     }
 }
 

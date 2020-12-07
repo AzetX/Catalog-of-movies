@@ -1,29 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { FilmsCollection } from './FindFilmsForm'
-import { fetchFilms, sortByYear } from '../redux/action'
+import { sortByYear } from '../redux/action'
+import { SortingFilms, Count, ParamSorting }  from '../interfaces'
 
 
-interface Nigga {
-    sortingByYear?: any
-    films?: any;
-}
-
-const SortigMovies: React.FC<Nigga> = ( { sortingByYear, films } ) => {
+const SortigMovies: React.FC<SortingFilms> = ( { sortingByYear, films } ) => {
     
     return (
-        <div className="soring">
+        <div className="sorting">
             <div> Sorting by: </div> 
-            <div className="release-date" onClick={() => sortingByYear(films)}> Year </div>
+            <div className="release-date" onClick={() => sortingByYear(films)}> year </div>
             <div className="raiting"> raiting </div>
         </div>
     )
 }
 
 
-interface Count {
-    count: any
-}
 
 const CounterMovies: React.FC<Count> = ( { count } ) => {
 
@@ -34,14 +26,7 @@ const CounterMovies: React.FC<Count> = ( { count } ) => {
 }
 
 
-interface Hui {
-    films?: any;
-    count?:number;
-    newState?: any;
-    sortByYear: any;//function
-}
-
- const SortFilms: React.FC<Hui> = ( { films, sortByYear } ) => {
+ const SortFilms: React.FC<ParamSorting> = ( { films, sortByYear } ) => {
 
 
      return (

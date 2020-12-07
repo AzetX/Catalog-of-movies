@@ -1,9 +1,10 @@
-import { FETCH_FILMS, SORTING_FILMS_YEAR, FETCH_FILM_FULL } from './types'
+import { FETCH_FILMS, SORTING_FILMS_YEAR, FETCH_FILM_FULL, GET_MOVIES_WTH_FAILURE, GET_MOVIE_WTH_FAILURE } from './types'
 
 
 
 const initialStateMovies = {
-    fetchedFilms: []
+    fetchedFilms: [],
+    incorrectRequestMovies:'' 
 }
 
 
@@ -22,35 +23,25 @@ export const MoviesRequestReducer  = (state = initialStateMovies, action: any) =
               // a должно быть равным b
               return 0;
         })};
-        // case GET_FULL_INFO:
-        // return {...state, fullFilmInfo: state.fullFilmInfo.concat(action.payload)} 
+        case GET_MOVIES_WTH_FAILURE:
+        return {...state, incorrectRequestMovies: 'Не, ну камон, введите корректо'}; 
      
         default: return state;
     }
 }
 
 
-// const paramRequestMovie = {
-//     titleRequest: '', 
-//     paramRequest: 's',
-// }
-
-// export const paramRequestReducer = (state = paramRequest, action: any) => {
-//     switch(action.type){
-//     case GET_PARAMS_REQUEST: 
-//     return {...state, titleRequest: state.titleRequest = action.titleLoad, paramRequest: state.paramRequest = action.paramLoad};
-//     default: return state
-//     }
-// }
-
 const initialStateMovie = {
-    fetchedFullMovie: []
+    fetchedFullMovie: [],
+    incorrectRequestMovie:'' 
 }
 
 export const paramFullMovieReducer = (state = initialStateMovie, action: any) => {
     switch(action.type){
     case FETCH_FILM_FULL: 
     return {...state, fetchedFullMovie: Object.values(action.payload)};
+    case GET_MOVIE_WTH_FAILURE:
+        return {...state, incorrectRequestMovie: 'Не, ну камон, введите корректо'};
     default: return state
     }
 }

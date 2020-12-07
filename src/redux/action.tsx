@@ -4,7 +4,7 @@ import { REQUEST_FILMS, SORTING_FILMS_YEAR, REQUEST_FULL_INFO } from './types'
 
 export function fetchFilms(){
     return {
-        type: REQUEST_FILMS   
+        type: REQUEST_FILMS 
     }
     
 }

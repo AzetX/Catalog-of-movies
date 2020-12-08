@@ -14,15 +14,18 @@ function getFullInfoMovie(titleMove: string){
     }
 }
 
- const FilmsList: React.FC<MoviesInfo> = ({ films }) => {
+ const FilmsList: React.FC<MoviesInfo> = ({ films, incorrectData }) => {
     const dispatch = useDispatch()
     
-    if(!films.length) {
+    if(incorrectData===true){
+        return (<p className="none-movies">ERROR &#128533;, TRY TO ENTER AGAIN </p>)
+    } 
+    else if(!films.length) {
         return (<p className="none-movies"> Sorry, but movies none found &#128533; </p>)
     }
+   
     
     function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, moveTitle){
-
         fullInfoMovie = getFullInfoMovie(moveTitle)
         return fullInfoMovie
     }

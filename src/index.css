@@ -171,15 +171,14 @@ code {
   display: grid;
   justify-items: center;
   gap: 5px;
-  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
 }
 
 
-.release-date:hover, .raiting:hover {
+.release-date:hover, .sort-straight:hover, .sort-reverse:hover  {
   color: palevioletred;
   cursor: pointer;
 } 
-
 
 
 .none-movies{

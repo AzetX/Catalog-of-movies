@@ -13,9 +13,11 @@ function* sagaWorkerAllMovies() {
     try {
     const payload =  yield call(fetchFilms)
     yield put({ type: FETCH_FILMS, payload})
+    yield put({type: GET_MOVIES_WTH_FAILURE, payload: false})
     }
     catch(e){
-        yield put({type: GET_MOVIES_WTH_FAILURE, payload: e.payload})
+        yield put({type: GET_MOVIES_WTH_FAILURE, payload: true})
+        console.error(e.payload)
     }
 }
 
@@ -34,7 +36,6 @@ function* sagaWorkerFullMovie() {
 async function fetchFilms() {
     // const response = await fetch(`http://www.omdbapi.com/?${newFilmsequest.paramMovies}=${newFilmsequest.titleMovie}&plot=full&apikey=27834fd8`)
     const response = await fetch(`http://www.omdbapi.com/?${parametrMovies.paramMovies}=${parametrMovies.titleMovie}&plot=full&apikey=27834fd8`)
-    
     const json =  await response.json()
     return json    
 }

@@ -1,20 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { sortByYear } from '../redux/action'
+import { sortByYear, sortByTitleStraight, sortByTitleReverse } from '../redux/action'
 import { SortingFilms, Count, ParamSorting }  from '../interfaces'
 
 
-const SortigMovies: React.FC<SortingFilms> = ( { sortingByYear, films } ) => {
+const SortigMovies: React.FC<SortingFilms> = ( { sortingByYear, sortByTitleStraight, sortByTitleReverse, films } ) => {
     
     return (
         <div className="sorting">
             <div> Sorting by: </div> 
             <div className="release-date" onClick={() => sortingByYear(films)}> year </div>
-            <div className="raiting"> raiting </div>
+         
+                    <div className="sort-straight" onClick={()=> sortByTitleStraight(films)}>a-z</div>
+                    <div className="sort-reverse" onClick={()=> sortByTitleReverse(films)}>z-a</div>
+        
         </div>
     )
 }
-
 
 
 const CounterMovies: React.FC<Count> = ( { count } ) => {
@@ -26,14 +28,14 @@ const CounterMovies: React.FC<Count> = ( { count } ) => {
 }
 
 
- const SortFilms: React.FC<ParamSorting> = ( { films, sortByYear } ) => {
+ const SortFilms: React.FC<ParamSorting> = ( { films, sortByYear, sortByTitleReverse, sortByTitleStraight } ) => {
 
 
      return (
 
         <div className="sort-movies">
             <CounterMovies count={films} />
-            <SortigMovies sortingByYear = {sortByYear} films={films}/>
+            <SortigMovies sortingByYear={sortByYear} films={films}  sortByTitleStraight={sortByTitleStraight} sortByTitleReverse={sortByTitleReverse}/>
         </div>
     )
 }
@@ -46,7 +48,9 @@ const mapStateToProps = function(store) {
   }
 
   const mapDispatchToProps = {
-        sortByYear: sortByYear
+        sortByYear: sortByYear,
+        sortByTitleStraight: sortByTitleStraight,
+        sortByTitleReverse: sortByTitleReverse
   }
 
 

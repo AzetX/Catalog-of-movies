@@ -1,14 +1,15 @@
 import { FETCH_FILMS, SORTING_FILMS_YEAR, FETCH_FILM_FULL, GET_MOVIES_WTH_FAILURE, GET_MOVIE_WTH_FAILURE,  SORTING_FILMS_TITLE_STRAIGHT, SORTING_FILMS_TITLE_REVERSE } from './types'
+import { State }  from '../interfaces'
 
 
-
-const initialStateMovies = {
+export const initialStateMovies: State = {
     fetchedFilms: [],
     incorrectRequestMovies: null
 }
 
 
 export const MoviesRequestReducer  = (state = initialStateMovies, action: any) => {
+    
     switch (action.type) {
         case FETCH_FILMS:   
             return {...state, fetchedFilms: Object.values(action.payload.Search)};  

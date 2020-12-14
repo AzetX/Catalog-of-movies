@@ -14,7 +14,7 @@ function getFullInfoMovie(titleMove: string){
     }
 }
 
- const FilmsList: React.FC<MoviesInfo> = ({ films, incorrectData }) => {
+ export const FilmsList: React.FC<MoviesInfo> = ({ films, incorrectData }) => {
     const dispatch = useDispatch()
     
     if(incorrectData===true){
@@ -29,8 +29,6 @@ function getFullInfoMovie(titleMove: string){
         fullInfoMovie = getFullInfoMovie(moveTitle)
         return fullInfoMovie
     }
-
-
 
     return (
   

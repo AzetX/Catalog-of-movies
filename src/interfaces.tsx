@@ -46,6 +46,12 @@ export interface FilmsCollection {
     alert?: string;
 }
 
-export interface Movie{
+export interface Movie {
     movie: any;
+}
+
+
+export interface State {
+    fetchedFilms: any,
+    incorrectRequestMovies: any;
 }

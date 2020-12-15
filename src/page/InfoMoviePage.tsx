@@ -13,7 +13,7 @@ const InfoMoviePage: React.FC<Movie> = ( { movie }) => {
             <div className="film-rait"><b>Raiting:</b> <i>{movie[16]}</i></div> 
             <div className="film-descr"><b>Descipton:</b> <br /> <i>{movie[9]}</i></div> 
     
-            <button className="btn-back" onClick = {()=>{history.push('/')}}>Обратно к списку</button>
+            <button className="btn-back" onClick = {()=>{history.push('/Catalog-of-movies')}}>Обратно к списку</button>
             
         </div>
     )

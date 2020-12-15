@@ -33,13 +33,13 @@ export function* sagaWorkerFullMovie() {
 
 export async function fetchFilms() {
     // const response = await fetch(`http://www.omdbapi.com/?${newFilmsequest.paramMovies}=${newFilmsequest.titleMovie}&plot=full&apikey=27834fd8`)
-    const response = await fetch(`http://www.omdbapi.com/?${parametrMovies.paramMovies}=${parametrMovies.titleMovie}&plot=full&apikey=27834fd8`)
+    const response = await fetch(`https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?${parametrMovies.paramMovies}=${parametrMovies.titleMovie}&plot=full&apikey=27834fd8`)
     const json =  await response.json()
     return json    
 }
 
 export async function fetchFullInfoMovie() {
-    const response = await fetch(`http://www.omdbapi.com/?t=${fullInfoMovie.titleMove}&plot=full&apikey=27834fd8`)
+    const response = await fetch(`https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=${fullInfoMovie.titleMove}&plot=full&apikey=27834fd8`)
     const json = await response.json()
     return json
 }

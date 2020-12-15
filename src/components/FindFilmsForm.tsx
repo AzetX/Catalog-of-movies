@@ -64,7 +64,6 @@ const InputForm: React.FC <InputFilmsProps> = ( { title, changeHandler, submitHa
             const titleMovie = await title;
             parametrMovies = await getParamsMovies(titleMovie, paramMovies);
             await setTitle('')
-            console.log(dispatch(fetchFilms()))
             return await dispatch(fetchFilms())
         }
     }

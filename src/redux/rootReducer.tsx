@@ -1,9 +1,9 @@
-import { combineReducers } from "redux";
-import { MoviesRequestReducer, paramFullMovieReducer } from './filmReducer'
+import { combineReducers } from 'redux';
+import { MoviesRequestReducer, paramFullMovieReducer } from './filmReducer';
 
 export const rootReducer = combineReducers({
-    films: MoviesRequestReducer,
-    paramFullMovieReducer: paramFullMovieReducer
-})
+  films: MoviesRequestReducer,
+  paramFullMovieReducer,
+});
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;

@@ -14,6 +14,7 @@ test('fetching Movies request', () => {
   };
 
   return expectSaga(sagaWorkerAllMovies)
+
     .provide([
       [call(fetchFilms), fakeFilms],
     ])
@@ -22,6 +23,10 @@ test('fetching Movies request', () => {
       payload: fakeFilms,
     })
     .dispatch({ type: 'FILMS/REQUEST_FILMS' })
+
+    .hasFinalState({
+      fetchFilms: fakeFilms
+    })
     .run();
 });
 
@@ -34,6 +39,8 @@ test('fetchingMovies wth error', () => {
     ])
     .put({ type: 'GET_MOVIES_WTH_FAILURE', payload: true })
     .dispatch({ type: 'FILMS/REQUEST_FILMS' })
+
+
     .run();
 });
 
